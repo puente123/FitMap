@@ -10,15 +10,11 @@ const {
 const router = express.Router()
 
 //GET all workouts
-router.get('/', (req, res) => {
-    res.json({mssg: 'GET all workouts'})
-})
+router.get('/', getWorkouts)
 
 //GET a single workout
 //id is a dynamic parameter
-router.get('/:id', (req, res) => {
-    res.json({mssg: 'Get single workout'})
-})
+router.get('/:id', getWorkout)
 
 //POST a new workout
 router.post('/', createWorkout)

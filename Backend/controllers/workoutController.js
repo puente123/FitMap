@@ -1,4 +1,5 @@
 const Workout = require('../models/workoutModel')
+const mongoose = require('mongoose')
 
 //create a seperaete controller file/folder to not make route code to messy
 
@@ -13,6 +14,12 @@ const getWorkouts = async (req, res) => {
 //get a single workout
 const getWorkout = async (req, res) => {
     const { id } = req.params
+
+    //checks if the id that was passed is a valid mongoose id
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({error: 'No such workout'})
+    }
+
     const workout = await Workout.findById(id)
 
     if(!workout){
