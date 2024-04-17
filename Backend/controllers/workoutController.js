@@ -44,12 +44,53 @@ const createWorkout = async (req, res) => {
 }
 
 //delete a workout
+const deleteWorkout = async (req, res) => {
+    //gets id that was passed 
+    const { id } = req.params
+
+    //checks if the id that was passed is a valid mongoose id
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({error: 'No such workout'})
+    }
+    
+    
+    //mongodb used _id so it checks if id is eqal to _id
+    const workout = await Workout.findOneAndDelete({_id: id})
+
+    if(!workout){
+        return res.status(404).json({error: 'No such workout'})
+    }
+
+    res.status(200).json(workout)
+}
 
 //update a workout
+const updateWorkout = async (req, res) => {
+    //gets id that was passed 
+    const { id } = req.params
+
+    //checks if the id that was passed is a valid mongoose id
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({error: 'No such workout'})
+    }
+
+    const workout = await Workout.findOneAndUpdate({_id: id},{
+        //gets the request body the ... spreads them
+        ...req.body
+    })
+
+    if(!workout){
+        return res.status(404).json({error: 'No such workout'})
+    }
+
+    res.status(200).json(workout)
+}
 
 
 module.exports = {
     getWorkouts,
     getWorkout,
-    createWorkout
+    createWorkout,
+    deleteWorkout,
+    updateWorkout
 }
