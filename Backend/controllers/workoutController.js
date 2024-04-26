@@ -1,21 +1,22 @@
+//Imports workoutModel, whichis the required format a workout needs to be in
 const Workout = require('../models/workoutModel')
 const mongoose = require('mongoose')
 
-//create a seperaete controller file/folder to not make route code to messy
+//Create a seperate controller file/folder to not make route code to messy
 
 //CREATE FUNCTIONS to be called in routes
 
-//get all workouts
+//Get all workouts
 const getWorkouts = async (req, res) => {
     const workouts = await Workout.find({}).sort({createdAt: -1})
     res.status(200).json(workouts)
 }
 
-//get a single workout
+//Get a single workout
 const getWorkout = async (req, res) => {
     const { id } = req.params
 
-    //checks if the id that was passed is a valid mongoose id
+    //Checks if the id that was passed is a valid mongoose id
     if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).json({error: 'No such workout'})
     }
@@ -29,11 +30,11 @@ const getWorkout = async (req, res) => {
     res.status(200).json(workout)
 }
 
-//create a new workout
+//Create a new workout
 const createWorkout = async (req, res) => {
     const {title, load, reps} = req.body
 
-    //checks if field is empty on creating input
+    //Checks if field is empty on creating input
     let emptyFields = []
 
     if(!title){
@@ -60,18 +61,18 @@ const createWorkout = async (req, res) => {
 
 }
 
-//delete a workout
+//Delete a workout
 const deleteWorkout = async (req, res) => {
-    //gets id that was passed 
+    //Gets id that was passed 
     const { id } = req.params
 
-    //checks if the id that was passed is a valid mongoose id
+    //Checks if the id that was passed is a valid mongoose id
     if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).json({error: 'No such workout'})
     }
     
     
-    //mongodb used _id so it checks if id is eqal to _id
+    //Mongodb used _id so it checks if id is eqal to _id
     const workout = await Workout.findOneAndDelete({_id: id})
 
     if(!workout){
@@ -81,18 +82,18 @@ const deleteWorkout = async (req, res) => {
     res.status(200).json(workout)
 }
 
-//update a workout
+//Update a workout
 const updateWorkout = async (req, res) => {
     //gets id that was passed 
     const { id } = req.params
 
-    //checks if the id that was passed is a valid mongoose id
+    //Checks if the id that was passed is a valid mongoose id
     if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).json({error: 'No such workout'})
     }
 
     const workout = await Workout.findOneAndUpdate({_id: id},{
-        //gets the request body the ... spreads them
+        //Gets the request body the ... spreads them
         ...req.body
     })
 
@@ -104,6 +105,7 @@ const updateWorkout = async (req, res) => {
 }
 
 
+//Exports the functions
 module.exports = {
     getWorkouts,
     getWorkout,

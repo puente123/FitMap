@@ -1,12 +1,12 @@
-//allows moongodb to have schemas
-//mongodb alone is schemeless
+//Allows moongodb to have schemas
+//Mongodb alone is schemeless
 const mongoose = require('mongoose')
 
-//function to create new schema
+//Function to create new schema
 const Schema = mongoose.Schema
 
 
-//sets the requirements when updating/inserting workout
+//Sets the requirements when updating/inserting workout
 const workoutSchema = new Schema({
     title: {
         type: String,

@@ -6,7 +6,8 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 const WorkoutDetails = ({ workout }) => {
 
     const {dispatch} = useWorkoutsContext()
- 
+
+    //Creats method to control delete button
     const handleClick = async () => {
         const response = await fetch('/api/workouts/' + workout._id,{
             method: 'DELETE'
@@ -18,6 +19,7 @@ const WorkoutDetails = ({ workout }) => {
         }
     }
 
+    
     return(
         <div className = "workout-details">
             <h4>{workout.title}</h4>
@@ -32,4 +34,4 @@ const WorkoutDetails = ({ workout }) => {
 
 export default WorkoutDetails
 
-//this file creates a output to the website based on the workout that is passed
+//This file creates a output to the website based on the workout that is passed

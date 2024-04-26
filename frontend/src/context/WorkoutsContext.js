@@ -16,7 +16,7 @@ export const workoutsReducer = (state, action) => {
             }
         case 'DELETE_WORKOUT':
             return {
-                //makes array and keeps each one that is not equal to the id
+                //Makes array and keeps each one that is not equal to the id
                 workouts: state.workouts.filter((w) => w._id !== action.payload._id)
             }
         default:
