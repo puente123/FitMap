@@ -3,9 +3,9 @@
 ## Description
 
 ## Getting Started
-TO RUN
-cd backend, npm run dev
-Make sure backend succesfully connects to database 
+TO RUN\n
+cd backend, npm run dev\n
+Make sure backend succesfully connects to database\n
 cd frontend, npm start
 
 
