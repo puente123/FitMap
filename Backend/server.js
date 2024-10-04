@@ -5,11 +5,14 @@ const mongoose = require('mongoose')
 
 //Imports routes from Backend/routes/workout.js, wrote in seperate folder to simplify
 const workoutRoutes = require('./routes/workouts.js')
+const cors = require('cors');
+
+// Enable CORS for all route
 
 //express app
 const app = express()
 
-
+app.use(cors());
 //Middlewear: functions that have acces to req and res 
 //Middlewear//USED FOR POST, PUT, allows to use json body data
 app.use(express.json())
