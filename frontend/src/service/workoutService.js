@@ -12,7 +12,7 @@ const handleRequest = async (request, errorMessage) => {
     return response.data;
   } catch (error) {
     console.error(errorMessage, error);
-    throw error;
+    throw error
   }
 };
 
