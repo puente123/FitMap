@@ -12,8 +12,8 @@ const WorkoutDetails = ({ workout }) => {
     const handleClick = async () => {
 
         try{
-        const json = await deleteWorkout(workout._id)
-        dispatch({type: 'DELETE_WORKOUT', payload: json})
+            const json = await deleteWorkout(workout._id)
+            dispatch({type: 'DELETE_WORKOUT', payload: json})
         }
         catch(error){
             console.error("Error in handleDeleteClick in frontend, when calling deleteWorkout", error);

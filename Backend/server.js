@@ -7,11 +7,12 @@ const mongoose = require('mongoose')
 const workoutRoutes = require('./routes/workouts.js')
 const cors = require('cors');
 
-// Enable CORS for all route
+
 
 //express app
 const app = express()
 
+// Enable CORS for all route
 app.use(cors());
 //Middlewear: functions that have acces to req and res 
 //Middlewear//USED FOR POST, PUT, allows to use json body data

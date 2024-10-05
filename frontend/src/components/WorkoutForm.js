@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext"
+import {  createWorkout } from "../service/workoutService"
 
 const WorkoutForm = () => {
 
@@ -16,28 +17,23 @@ const WorkoutForm = () => {
 
         const workout = {title, load, reps}
 
-        const response = await fetch('/api/workouts', {
-            method: 'POST',
-            body: JSON.stringify(workout),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+        try{
+            const json = await createWorkout(workout)
 
-        const json = await response.json()
-
-        if(!response.ok){
-            setError(json.error)
-            setEmptyFields(json.emptyFields)
-        }
-
-        if(response.ok){
+            //const json = await response.json()
             setTitle('')
             setLoad('')
             setReps('')
             setError(null)
             console.log('New Workout Added', json)
             dispatch({type: 'CREATE_WORKOUT', payload: json})  
+            
+        }
+        catch(error){
+            //setError(json.error)
+            //setEmptyFields(json.emptyFields)
+            console.error("Error in createWorkout", error)
+            throw error
         }
     }
 

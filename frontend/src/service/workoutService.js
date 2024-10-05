@@ -1,7 +1,5 @@
 import axios from "axios";
 
-//const workoutAPIurl = "http://localhost:4000/api/workouts";
-
 const apiClient = axios.create({
   baseURL: "http://localhost:4000/api/workouts",
 });
@@ -12,25 +10,23 @@ const handleRequest = async (request, errorMessage) => {
     return response.data;
   } catch (error) {
     console.error(errorMessage, error);
-    throw error
+    throw error;
   }
 };
 
 const getWorkout = (id) => {
   const errorMessage = `Error in getWorkout function in front end, ID: ${id}`;
-
-  const resturn = handleRequest(() => apiClient.get(`/${id}`), errorMessage);
-  console.log(resturn)
+  return handleRequest(() => apiClient.get(`/${id}`), errorMessage);
 };
 
 const getWorkouts = () => {
   const errorMessage = `Error in getWorkouts function in front end`;
-  return handleRequest(() => apiClient.get('/'), errorMessage);
+  return handleRequest(() => apiClient.get("/"), errorMessage);
 };
 
 const createWorkout = (body) => {
   const errorMessage = `Error in createWorkout function in front end`;
-  return handleRequest(() => apiClient.post('/', body), errorMessage);
+  return handleRequest(() => apiClient.post("/", body), errorMessage);
 };
 
 const deleteWorkout = (id) => {
