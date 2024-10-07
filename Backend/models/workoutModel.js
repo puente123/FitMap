@@ -5,7 +5,6 @@ const mongoose = require('mongoose')
 //Function to create new schema
 const Schema = mongoose.Schema
 
-
 //Sets the requirements when updating/inserting workout
 const workoutSchema = new Schema({
     title: {

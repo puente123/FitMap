@@ -6,14 +6,14 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 const WorkoutDetails = ({ workout }) => {
 
-    const {dispatch} = useWorkoutsContext()
+    const {updateWorkouts} = useWorkoutsContext()
 
     //Creats method to control delete button
     const handleClick = async () => {
 
         try{
             const json = await deleteWorkout(workout._id)
-            dispatch({type: 'DELETE_WORKOUT', payload: json})
+            updateWorkouts({type: 'DELETE_WORKOUT', payload: json})
         }
         catch(error){
             console.error("Error in handleDeleteClick in frontend, when calling deleteWorkout", error);

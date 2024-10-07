@@ -4,7 +4,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 
 //Imports routes from Backend/routes/workout.js, wrote in seperate folder to simplify
-const workoutRoutes = require('./routes/workouts.js')
+const workoutRoutes = require('./routes/workoutsRoutes.js')
 const cors = require('cors');
 
 

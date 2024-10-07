@@ -7,14 +7,14 @@ import WorkoutForm from "../components/WorkoutForm";
 import { getWorkouts } from "../service/workoutService";
 
 const Home = () => {
-  const { workouts, dispatch } = useWorkoutsContext();
+  const { workouts, updateWorkouts } = useWorkoutsContext();
   //const [workouts, setWorkouts] = useState(null)
 
   useEffect(() => {
     const fetchWorkouts = async () => {
       try {
         const json = await getWorkouts();
-        dispatch({ type: "SET_WORKOUTS", payload: json });
+        updateWorkouts({ type: "SET_WORKOUTS", payload: json });
       } catch (error) {
         console.error("Failed to fetch workouts", error);
       }
@@ -23,7 +23,7 @@ const Home = () => {
     };
 
     fetchWorkouts();
-  }, [dispatch]);
+  }, [updateWorkouts]);
 
   return (
     <div className="home">

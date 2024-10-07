@@ -27,14 +27,14 @@ export const workoutsReducer = (state, action) => {
 
 export const WorkoutsContextProvider = ({ children }) => {
 
-    const [state, dispatch] = useReducer( workoutsReducer, {
+    const [state, updateWorkouts] = useReducer( workoutsReducer, {
         workouts: null
     })
 
-    //dispatch({type: 'SET_WORKOUTS', payload: [{}, {}]})
+    //updateWorkouts({type: 'SET_WORKOUTS', payload: [{}, {}]})
 
     return(
-        <WorkoutsContext.Provider value={{...state, dispatch}}>
+        <WorkoutsContext.Provider value={{...state, updateWorkouts}}>
             { children }
         </WorkoutsContext.Provider>
     )
