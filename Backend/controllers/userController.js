@@ -10,7 +10,7 @@ const createUser = async (req, res) => {
     email: email,
   };
   try {
-    await User.save(newUser);
+    await User.create(newUser);
     res.status(201).json(newUser);
   } catch (error) {
     res.status(400).json(error);
@@ -19,7 +19,7 @@ const createUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   try {
-    const response = await User.findByIdAndDelete(req.pararms._id);
+    //const response = await User.findByIdAndDelete(req.pararms._id);
     res.status(201).json(response);
   } catch (error) {
     res.status(400).json(error);
@@ -45,7 +45,7 @@ const updateUser = async (req, res) => {
 
 const getUser = async (req, res) => {
   const { username, password } = req.body;
-  
+
   try {
     const user = await User.findOne({ username });
 
@@ -61,11 +61,35 @@ const getUser = async (req, res) => {
   }
 };
 
-const loginUser = async (req, res) =>{
-    res.json({mssg:'login user'})
-}
-const signupUser = async (req, res) =>{
-    res.json({mssg:'singup user'})
-}
+const getAllUsers = async (req, res) => {
+  try {
+    const allUsers = await User.find({})
+    res.status(200).json(allUsers);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
-module.exports = { createUser, deleteUser, updateUser, getUser };
+const loginUser = async (req, res) => {
+  res.json({ mssg: "login user" });
+};
+
+const signupUser = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const users = await User.signup(email, password);
+    res.status(200).json({ email, users });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+module.exports = {
+  createUser,
+  deleteUser,
+  updateUser,
+  getUser,
+  loginUser,
+  signupUser,
+  getAllUsers,
+};
