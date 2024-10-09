@@ -1,5 +1,4 @@
 const express = require('express')
-const Workout = require('../models/workoutModel')
 
 //Imports methods created in /backend/controllers/workoutcontroller to create routes
 const {

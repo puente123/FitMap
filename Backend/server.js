@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 
 //Imports routes from Backend/routes/workout.js, wrote in seperate folder to simplify
 const workoutRoutes = require('./routes/workoutsRoutes.js')
+const userRoutes = require("./routes/userRoutes.js")
 const cors = require('cors');
 
 
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
 
 //Routes
 app.use('/api/workouts', workoutRoutes)
+app.use('/api/user', userRoutes)
 
 //Connect to database
 mongoose.connect(process.env.MONGO_URI)
