@@ -18,7 +18,6 @@ const userSchema = new Schema({
 
 // Use "async function" instead of '=>' becuase we are using "this."
 userSchema.statics.signup = async function (email, password) {
-    
   if (!email || !password) {
     throw Error("All input fields must be filled");
   }
@@ -40,6 +39,30 @@ userSchema.statics.signup = async function (email, password) {
     const hash = await bcrypt.hash(password, salt);
 
     const user = await this.create({ email, password: hash });
+    return user;
+  } catch (error) {
+    throw error;
+  }
+};
+
+//Static Login Method
+userSchema.statics.login = async function (email, password) {
+  if (!email || !password) {
+    throw Error("All input fields must be filled");
+  }
+
+  try {
+    const user = await this.findOne({ email });
+    if (!user) {
+      throw Error("user not found: Incorrect Email");
+    }
+
+    const match = await bcrypt.compare(password, user.password);
+
+    if (!match) {
+      throw Error("Incorrect password");
+    }
+
     return user;
   } catch (error) {
     throw error;
