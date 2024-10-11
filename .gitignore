@@ -37,3 +37,4 @@ jspm_packages/
 
 # Windows files
 Thumbs.db
+Backend/.env
