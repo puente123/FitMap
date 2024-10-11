@@ -13,6 +13,7 @@ const SignupPage = () => {
 
   return (
     <form className="signup" onSubmit={onSubmitClick}>
+        <h3>Sign Up</h3>
       <label htmlFor="email">Input Email</label>
       <br />
       <input
