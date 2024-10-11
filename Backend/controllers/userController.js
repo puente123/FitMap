@@ -1,10 +1,29 @@
 const User = require("../models/userModel");
-const jwt = require("jsonwebtoken")
-const SECRET_KEY = process.env.SECRET_KEY
+const jwt = require("jsonwebtoken");
+//require("dotenv").config();
+const SECRET_KEY = process.env.SECRET_KEY;
 
 const createToken = (_id) => {
-  jwt.sign({_id}, SECRET_KEY)
-}
+  //Creates JSON web token
+  return jwt.sign({ _id }, SECRET_KEY, { expiresIn: "3d" });
+};
+
+const loginUser = async (req, res) => {
+  res.json({ mssg: "login user" });
+};
+
+const signupUser = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const users = await User.signup(email, password);
+
+    const token = createToken(users._id);
+
+    res.status(200).json({ email, token });
+  } catch (error) {
+    res.status(400).json({ error: error.message + "this" });
+  }
+};
 
 const createUser = async (req, res) => {
   const { username, password, email } = req.body;
@@ -68,22 +87,8 @@ const getUser = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
   try {
-    const allUsers = await User.find({})
+    const allUsers = await User.find({});
     res.status(200).json(allUsers);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
-
-const loginUser = async (req, res) => {
-  res.json({ mssg: "login user" });
-};
-
-const signupUser = async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    const users = await User.signup(email, password);
-    res.status(200).json({ email, users });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
