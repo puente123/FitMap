@@ -1,5 +1,9 @@
 const User = require("../models/userModel");
-const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken")
+
+const createToken = () => {
+  
+}
 
 const createUser = async (req, res) => {
   const { username, password, email } = req.body;
