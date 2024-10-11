@@ -28,12 +28,10 @@ const Home = () => {
   return (
     <div className="home">
       <div className="workouts">
-        {/* cycles through workouts, but checks if workout exists
-                {}: This is JSX syntax for embedding JavaScript expressions within JSX.*/}
-        {workouts &&
-          workouts.map((workout) => (
-            <WorkoutDetails key={workout._id} workout={workout} />
-          ))}
+        {/* cycles through workouts, but checks if workout exists*/}
+        {workouts?.map((workout) => (
+          <WorkoutDetails key={workout._id} workout={workout} />
+        ))}
       </div>
       <WorkoutForm />
     </div>
