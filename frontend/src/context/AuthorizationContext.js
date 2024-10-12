@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useEffect } from "react";
 
 const AuthContext = createContext();
 
@@ -19,6 +19,14 @@ const AuthContextProvider = ({ children }) => {
   const [state, updateAuth] = useReducer(authReducer, {
     user: null,
   });
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'))
+
+    if(user){
+      updateAuth({type:"LOGIN", payload: user})
+    }
+  }, [])
 
   console.log("AuthContext State Change:", state);
 

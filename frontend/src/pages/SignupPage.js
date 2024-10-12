@@ -12,6 +12,10 @@ const SignupPage = () => {
     event.preventDefault();
     await signup(email, password)
     console.log(email, password);
+    if (error == null){
+      setEmail("Success")
+      setPassword("Sucess")
+    }
   };
 
   return (
