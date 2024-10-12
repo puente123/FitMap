@@ -10,7 +10,7 @@ const SignupPage = () => {
   const onSubmitClick = async (event) => {
     //without this the page would automatically reload by default
     event.preventDefault();
-
+    await signup(email, password)
     console.log(email, password);
   };
 

@@ -23,7 +23,7 @@ const useSignup = () => {
     } else {
       //Save the user to lcoal storage
       localStorage.setItem("user", JSON.stringify(json));
-
+      console.log(json);
       updateAuth({ type: "LOGIN", payload: json });
       setIsLoading(false);
     }
