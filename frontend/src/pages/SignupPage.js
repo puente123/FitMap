@@ -1,8 +1,11 @@
 import React, { useState} from "react";
+import useSignup from "../hooks/useSignup";
 
 const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {signup, error, isLoading} = useSignup()
+
 
   const onSubmitClick = async (event) => {
     //without this the page would automatically reload by default
@@ -30,7 +33,8 @@ const SignupPage = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <br />
-      <button>Submit!</button>
+      <button disabled={isLoading}>Submit!</button>
+      {error && <div className="error">{error}</div>}
     </form>
   );
 };

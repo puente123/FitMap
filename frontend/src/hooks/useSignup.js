@@ -1,22 +1,35 @@
-import { useState } from 'react';
-import { useAuthContext } from './useAuthorizationContext'
+import { useState } from "react";
+import useAuthContext from "./useAuthorizationContext";
 
-import { postSignup } from '../service/userService';
-
+import { postSignup } from "../service/userService";
 
 const useSignup = () => {
-    const [error, setError] = useState(null)
-    const [isLoading, setIsLoading] = useState(null)
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(null);
+  const { updateAuth } = useAuthContext();
 
+  const signup = async (email, password) => {
+    setIsLoading(true);
+    setError(null);
 
+    const response = await postSignup({ email, password });
+    const json = response.data;
 
-    const signup = async (email, password) => {
-        setIsLoading(true)
-        setError(null)
+    console.log(response.ok);
 
-        const response = await postSignup({email, password})
-    }   
-}
+    if (response.status != 200) {
+      setIsLoading(false);
+      setError(json.error);
+    } else {
+      //Save the user to lcoal storage
+      localStorage.setItem("user", JSON.stringify(json));
 
-export default useSignup
+      updateAuth({ type: "LOGIN", payload: json });
+      setIsLoading(false);
+    }
+  };
 
+  return { signup, isLoading, error };
+};
+
+export default useSignup;
