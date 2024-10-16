@@ -28,7 +28,7 @@ export const workoutsReducer = (state, action) => {
 export const WorkoutsContextProvider = ({ children }) => {
 
     const [state, updateWorkouts] = useReducer( workoutsReducer, {
-        workouts: null
+        workouts: []
     })
 
     //updateWorkouts({type: 'SET_WORKOUTS', payload: [{}, {}]})

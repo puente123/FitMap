@@ -1,5 +1,6 @@
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext"
 import { deleteWorkout } from "../service/workoutService"
+import useAuthContext from "../hooks/useAuthorizationContext"
 
 //date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
@@ -7,12 +8,17 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 const WorkoutDetails = ({ workout }) => {
 
     const {updateWorkouts} = useWorkoutsContext()
+    const {user} = useAuthContext()
 
     //Creats method to control delete button
     const handleClick = async () => {
 
+        if(!user){
+            return
+        }
+
         try{
-            const json = await deleteWorkout(workout._id)
+            const json = await deleteWorkout(workout._id, user.token)
             updateWorkouts({type: 'DELETE_WORKOUT', payload: json})
         }
         catch(error){

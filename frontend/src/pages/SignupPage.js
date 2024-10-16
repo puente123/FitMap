@@ -1,10 +1,12 @@
 import React, { useState} from "react";
 import useSignup from "../hooks/useSignup";
+import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {signup, error, isLoading} = useSignup()
+  const {signup, error, isLoading} = useSignup() 
+  const navigate = useNavigate() 
 
 
   const onSubmitClick = async (event) => {
@@ -13,8 +15,7 @@ const SignupPage = () => {
     await signup(email, password)
     console.log(email, password);
     if (error == null){
-      setEmail("Success")
-      setPassword("Sucess")
+      navigate("/")
     }
   };
 

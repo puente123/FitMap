@@ -19,19 +19,41 @@ const getWorkout = (id) => {
   return handleRequest(() => apiClient.get(`/${id}`), errorMessage);
 };
 
-const getWorkouts = () => {
+const getWorkouts = (token) => {
   const errorMessage = `Error in getWorkouts function in front end`;
-  return handleRequest(() => apiClient.get("/"), errorMessage);
+  return handleRequest(
+    () =>
+      apiClient.get("/", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    errorMessage
+  );
 };
 
-const createWorkout = (body) => {
+const createWorkout = (body, token) => {
   const errorMessage = `Error in createWorkout function in front end`;
-  return handleRequest(() => apiClient.post("/", body), errorMessage);
+  return handleRequest(
+    () =>
+      apiClient.post("/", body, {
+        headers: { Authorization: `Bearer ${token}` },
+      }),
+    errorMessage
+  );
 };
 
-const deleteWorkout = (id) => {
+const deleteWorkout = (id, token) => {
   const errorMessage = `Error in deleteWorkout function in front end, ID: ${id}`;
-  return handleRequest(() => apiClient.delete(`/${id}`), errorMessage);
+  return handleRequest(
+    () =>
+      apiClient.delete(`/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    errorMessage
+  );
 };
 
 const updateWorkout = (id, body) => {

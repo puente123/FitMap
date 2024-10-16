@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import { createWorkout } from "../service/workoutService";
+import useAuthContext from "../hooks/useAuthorizationContext";
 
 const WorkoutForm = () => {
   const { updateWorkouts } = useWorkoutsContext();
+  const { user } = useAuthContext();
 
   const [title, setTitle] = useState("");
   const [load, setLoad] = useState("");
@@ -14,11 +16,16 @@ const WorkoutForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!user) {
+      setError("You Must Be Logged In");
+      return;
+    }
+
     //if (title && load && reps) {
     const workout = { title, load, reps };
 
     try {
-      const json = await createWorkout(workout);
+      const json = await createWorkout(workout, user.token);
       setTitle("");
       setLoad("");
       setReps("");
