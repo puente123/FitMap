@@ -9,8 +9,13 @@ const {
   updateWorkout,
 } = require("../controllers/workoutController");
 
+const requireAuth = require('../middleware/requireAuth')
+
 //creates a router instance
 const router = express.Router();
+
+//Require authorization for all workout routes
+router.use(requireAuth)
 
 //GET all workouts , calls the function made in workoutController.js for each
 router.get("/", getWorkouts);
