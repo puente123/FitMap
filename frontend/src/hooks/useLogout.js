@@ -9,7 +9,7 @@ const useLogout = () => {
 
   const logout = () => {
     updateAuth({ type: "LOGOUT" });
-    updateWorkouts({type: "SET_WORKOUTS", payload: []})
+    updateWorkouts({type: "SET_WORKOUTS", payload: null})
     localStorage.removeItem("user");
     navigate("/")
   };
